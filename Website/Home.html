@@ -5,100 +5,910 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Script by Public - Home</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #FFD700;
+            --text-color: #333;
+            --accent-color: #4a4a4a;
+            --light-color: #f9f9f9;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background-image: url('LogoJPEG'); /* Add your image URL here */
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            background-image: url('Logo.JPEG');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 20px 0;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            margin-bottom: 40px;
+        }
+        
+        .logo {
             text-align: center;
-            color:  rgb(0, 0, 0);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        header, footer {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
+        
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 5px;
         }
-        section {
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-top: -40px;
+            margin-bottom: 40px;
         }
-        .social-links {
-            margin-top: 10px;
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .social-links a {
-            color: #FFD700;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0 10px;
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
-        .social-links a:hover {
-            text-decoration: underline;
-        }
-        ul {
+        
+        .nav-menu {
+            display: flex;
             list-style: none;
+            margin: 0;
             padding: 0;
         }
-        ul li {
-            margin: 10px 0;
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .auth-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .login-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .signup-btn {
+            background-color: var(--primary-color);
+            color: black;
+        }
+        
+        .signup-btn:hover {
+            background-color: white;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: var(--transition);
+        }
+        
+        /* Page Content */
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .process-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: process-counter;
+        }
+        
+        .process-list li {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 215, 0, 0.1);
+            position: relative;
+            padding-left: 70px;
+            counter-increment: process-counter;
+        }
+        
+        .process-list li::before {
+            content: counter(process-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        
+        .process-list strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .features-list li {
+            padding: 15px;
+            background-color: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .features-list li:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 40px;
+        }
+        
+        .cta-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+        }
+        
+        .social-links {
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Script Card Styles */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .script-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-category {
+            display: inline-block;
+            font-size: 0.8rem;
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .card-body {
+            padding: 15px;
+        }
+        
+        .card-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #888;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .script-content {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .form-submit:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .form-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: var(--accent-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.9);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .auth-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-list li {
+                padding-left: 60px;
+            }
+            
+            .social-links a {
+                display: block;
+                margin: 10px auto;
+                max-width: 200px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Script by Public</h1>
+        <div class="container">
+            <div class="logo">SCRIPT BY PUBLIC</div>
+            <div class="tagline">Where Public Opinions Shape Engaging Stories & Scripts</div>
+        </div>
     </header>
     
-    <section>
-        <h2>Welcome to Script by Public</h2>
-        <h3>Where Public Opinions Shape Engaging Stories & Scripts</h3>
-        <p>
-            At <strong>Script by Public</strong>, we believe that every voice has the power to inspire.
-            Our platform transforms public opinions, trending discussions, and unique ideas into captivating stories, scripts, and creative content.
-            Whether it’s a social issue, a trending debate, or a random thought shared by people, we craft meaningful narratives that reflect the pulse of the public.
-        </p>
-    </section>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="nav-logo">Script by Public</div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-page="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="explore">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="contact">Contact Us</a>
+                </li>
+            </ul>
+            
+            <div class="auth-buttons">
+                <a href="#" class="auth-button login-btn" data-page="login">Login</a>
+                <a href="#" class="auth-button signup-btn" data-page="signup">Sign Up</a>
+            </div>
+            
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home-content" class="page-content active">
+            <section>
+                <h2>WELCOME TO SCRIPT BY PUBLIC</h2>
+                <p>
+                    At <strong>Script by Public</strong>, we believe that every voice has the power to inspire.
+                    Our platform transforms public opinions, trending discussions, and unique ideas into captivating stories, scripts, and creative content.
+                </p>
+                <p>
+                    Whether it's a social issue, a trending debate, or a random thought shared by people, we craft meaningful narratives that reflect the pulse of the public.
+                </p>
+            </section>
 
-    <section>
-        <h2>📌 How It Works</h2>
-        <ul>
-            <li><strong>1️⃣ We Listen to Public Opinions</strong><br>
-                We gather insights, trending topics, and public sentiments from various platforms, discussions, and polls. Your thoughts, perspectives, and ideas become the foundation of our storytelling.
-            </li>
-            <li><strong>2️⃣ We Create Compelling Scripts & Stories</strong><br>
-                Our creative team transforms these opinions into engaging scripts, short stories, dialogues, and narratives—ready to be shared with the world.
-            </li>
-            <li><strong>3️⃣ We Share with the Audience</strong><br>
-                Our content is published across multiple platforms, including Instagram (<a href="https://www.instagram.com/scriptbypublic.in" target="_blank">@ScriptByPublic</a>) and our website, making sure every story reaches the right audience.
-            </li>
-        </ul>
-    </section>
+            <section>
+                <h2>How It Works</h2>
+                <ul class="process-list">
+                    <li>
+                        <strong>We Listen to Public Opinions</strong>
+                        We gather insights, trending topics, and public sentiments from various platforms, discussions, and polls. Your thoughts, perspectives, and ideas become the foundation of our storytelling.
+                    </li>
+                    <li>
+                        <strong>We Create Compelling Scripts & Stories</strong>
+                        Our creative team transforms these opinions into engaging scripts, short stories, dialogues, and narratives—ready to be shared with the world.
+                    </li>
+                    <li>
+                        <strong>We Share with the Audience</strong>
+                        Our content is published across multiple platforms, including Instagram (<a href="https://www.instagram.com/scriptbypublic.in" target="_blank">@ScriptByPublic</a>) and our website, making sure every story reaches the right audience.
+                    </li>
+                </ul>
+            </section>
 
-    <section>
-        <h2>🌟 Why Script by Public?</h2>
-        <ul>
-            <li>✔ <strong>Public-Driven Content:</strong> Your opinions shape our stories.</li>
-            <li>✔ <strong>Creative & Engaging:</strong> We turn discussions into impactful narratives.</li>
-            <li>✔ <strong>Community-Powered:</strong> A storytelling platform made for and by the people.</li>
-        </ul>
-    </section>
+            <section>
+                <h2>Why Script by Public?</h2>
+                <ul class="features-list">
+                    <li><strong>Public-Driven Content:</strong> Your opinions shape our stories.</li>
+                    <li><strong>Creative & Engaging:</strong> We turn discussions into impactful narratives.</li>
+                    <li><strong>Community-Powered:</strong> A storytelling platform made for and by the people.</li>
+                    <li><strong>Diverse Perspectives:</strong> We value all voices and viewpoints.</li>
+                    <li><strong>Cultural Relevance:</strong> Our stories reflect current trends and issues.</li>
+                    <li><strong>Authentic Storytelling:</strong> Real opinions create genuine narratives.</li>
+                </ul>
+            </section>
+        </div>
+        <section class="cta-section">
+            <div class="container">
+                <h2>Join the Movement</h2>
+                <p>
+                    Want to see your ideas come to life? Share your thoughts, participate in polls, and be part of the creative revolution. 
+                    Your voice matters, and together, we can create stories that make an impact!
+                </p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/ScriptByPublic.in" target="_blank">Follow Us on Instagram</a>
+                    <a href="#" target="_blank">Submit Your Idea</a>
+                </div>
+            </div>
+        </section>
+    
+        <footer>
+            &copy; 2025 Script by Public. All rights reserved.
+        </footer>
+    </body>
+    </html>
 
-    <section>
-        <h2>🚀 Join the Movement</h2>
-        <p>
-            Want to see your ideas come to life? Share your thoughts, participate in polls, and be part of the creative revolution. 
-            Your voice matters, and together, we can create stories that make an impact!
-        </p>
-        <p><strong>📲 Follow Us on Instagram:</strong> <a href="https://www.instagram.com/ScriptByPublic.in" target="_blank">@ScriptByPublic</a></p>
-        <p><strong>🌍 Stay updated right here on our website!</strong></p>
-    </section>
-
-    <footer>
-        &copy; 2025 Script by Public. All rights reserved.
-    </footer>
-</body>
-</html>
+        <!-- Explore Page -->
+        <div id="explore-content" class="page-content">
+            <section>
+                <h2>EXPLORE SCRIPTS</h2>
+                <p>Discover our collection of scripts, stories, and narratives crafted from public opinions and trending discussions. Click on any script to read the full content.</p>
+                
+                <div class="scripts-grid">
+                    <!-- Script Card 1 -->
+                    <div class="script-card" data-script="The Coffee Connection">
+                        <div class="card-header">
+                            <h3 class="card-title">The Coffee Connection</h3>
+                            <span class="card-category">Romance</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">A chance meeting at a coffee shop leads to a surprising connection.</p>
+                            <div class="card-meta">
+                                <span>3 min read</span>
+                                <span>April 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Card 2 -->
+                    <div class="script-card" data-script="Digital Detox">
+                        <div class="card-header">
+                            <h3 class="card-title">Digital Detox</h3>
+                            <span class="card-category">Drama</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">A tech addict disconnects and rediscovers the analog world.</p>
+                            <div class="card-meta">
+                                <span>4 min read</span>
+                                <span>March 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Card 3 -->
+                    <div class="script-card" data-script="The Interview">
+                        <div class="card-header">
+                            <h3 class="card-title">The Interview</h3>
+                            <span class="card-category">Career</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">A candidate learns that passion projects can speak louder than experience.</p>
+                            <div class="card-meta">
+                                <span>3 min read</span>
+                                <span>February 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Card 4 -->
+                    <div class="script-card" data-script="The Last Message">
+                        <div class="card-header">
+                            <h3 class="card-title">The Last Message</h3>
+                            <span class="card-category">Drama</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">A story about the words we leave unsaid and second chances.</p>
+                            <div class="card-meta">
+                                <span>5 min read</span>
+                                <span>February 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Card 5 -->
+                    <div class="script-card" data-script="Analog Dreams">
+                        <div class="card-header">
+                            <h3 class="card-title">Analog Dreams</h3>
+                            <span class="card-category">Sci-Fi</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">In a digital world, one person searches for authentic experiences.</p>
+                            <div class="card-meta">
+                                <span>6 min read</span>
+                                <span>January 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Card 6 -->
+                    <div class="script-card" data-script="Generation Gap">
+                        <div class="card-header">
+                            <h3 class="card-title">Generation Gap</h3>
+                            <span class="card-category">Family</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-description">A grandmother and granddaughter find common ground through technology.</p>
+                            <div class="card-meta">
+                                <span>4 min read</span>
+                                <span>March 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- About Page -->
+        <div id="about-content" class="page-content">
+            <section>
+                <h2>ABOUT US</h2>
+                <p>
+                    <strong>Script by Public</strong> was founded in 2024 with a simple yet powerful mission: to transform the collective voice of the public into meaningful, engaging narratives that reflect our shared human experiences.
+                </p>
+                <p>
+                    We believe that everyone has a story to tell, and every opinion holds potential for a powerful narrative. Our team of talented writers and creators works diligently to turn these public opinions, trending discussions, and unique ideas into scripts, short stories, and creative content that resonates with diverse audiences.
+                </p>
+                <p>
+                    What makes us unique is our commitment to authenticity. Every script we create is born from real conversations, debates, and thoughts shared by people just like you. This approach ensures that our content remains relevant, relatable, and reflective of the world we live in.
+                </p>
+                <p>
+                    As we continue to grow, our vision remains clear: to create a platform where public voices shape the stories we share, fostering understanding, empathy, and connection across different perspectives and experiences.
+                </p>
+            </section>
+            
+            <section>
+                <h2>OUR TEAM</h2>
+                <p>
+                    Behind Script by Public is a diverse team of writers, storytellers, and creative minds who are passionate about transforming public opinions into captivating narratives.
+                </p>
+                <p>
+                    Our team brings together a wealth of experience in scriptwriting, storytelling, creative writing, journalism, and digital content creation. This diverse skill set allows us to craft scripts and stories that span various genres, tones, and formats, ensuring that every narrative we create is unique and compelling.
+                </p>
+                <p>
+                    We are united by our belief in the power of storytelling to inspire, educate, and connect people from all walks of life. Through our creative work, we aim to amplify voices, shed light on important issues, and create meaningful content that reflects the rich tapestry of human experience.
+                </p>
+            </section>
+        </div>
+        
+        <!-- Contact Page -->
+        <div id="contact-content" class="page-content">
+            <section>
+                <h2>CONTACT US</h2>
+                <p>
+                    Have a question, suggestion, or just want to connect? We'd love to hear from you! Fill out the form below, and our team will get back to you as soon as possible.
+                </p>
+                
+                <div class="form-container">
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+            
+            <section>
+                <h2>CONNECT WITH US</h2>
+                <p>
+                    Follow us on social media to stay updated on our latest scripts, behind-the-scenes insights, and opportunities to contribute your opinions to future narratives.
+                </p>
+                
+                <div class="social-links" style="text-align: center;">
+                    <a href="https://www.instagram.com/ScriptByPublic.in" target="_blank">Instagram</a>
+                    <a href="#" target="_blank">Twitter</a>
+                    <a href="#" target="_blank">Facebook</a>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Login Page -->
+        <div id="login-content" class="page-content">
+            <section>
+                <h2>LOGIN</h2>
+                <p>
+                    Welcome back! Log in to your Script by Public account to access exclusive content, save your favorite scripts, and participate in our community discussions.
+                </p>
+                
+                <div class="form-container">
+                    <form id="login-form" class="login-form">
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Email</label>
+                            <input type="email" id="login-email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Password</label>
+                            <input type="password" id="login-password" name="password" class="form-input" required>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">Login</button>
+                        
+                        <div class="form-switch">
+                            Don't have an account? <a href="#" data-page="signup">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Signup Page -->
+        <div id="signup-content" class="page-content">
+            <section>
+                <h2>SIGN UP</h2>
+                <p>
+                    
+                Script by Public community! Create an account to share your opinions, save your favorite scripts, and help shape the stories we tell.
+                </p>
+                
+                <div class="form-container">
+                    <form id="signup-form" class="signup-form">
+                        <div class="form-group">
+                            <label for="
